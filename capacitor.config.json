@@ -1,0 +1,8 @@
+{
+  "appId": "com.poker.aiholdem",
+  "appName": "德州扑克AI单机",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}

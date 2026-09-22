@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>德州扑克 · AI 单机版</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============ 主菜单 ============ -->
+<div id="menu" class="screen on">
+  <h1>♠ 德州扑克 · AI 单机版 ♥</h1>
+  <p class="sub">离线 6 人桌，你对战 5 个 AI</p>
+
+  <div class="panel">
+    <h2>牌桌设置</h2>
+    <div class="grid">
+      <div class="field"><label>初始筹码</label><input type="number" id="setChips" min="100" value="1000" /></div>
+      <div class="field"><label>小盲 SB</label><input type="number" id="setSB" min="1" value="10" /></div>
+      <div class="field"><label>大盲 BB</label><input type="number" id="setBB" min="1" value="20" /></div>
+      <div class="field"><label>前注 Ante</label><input type="number" id="setAnte" min="0" value="0" /></div>
+    </div>
+    <div class="field" style="margin-top:10px">
+      <label>AI 难度</label>
+      <div class="seg" id="aiLevel">
+        <button data-level="easy">简单</button>
+        <button data-level="medium" class="on">中等</button>
+        <button data-level="hard">困难</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="primary big" id="newGameBtn">开始新对局</button>
+  <button class="ghost big" id="continueBtn" style="display:none">继续上一局</button>
+</div>
+
+<!-- ============ 牌桌 ============ -->
+<div id="game" class="screen">
+  <div class="topbar">
+    <button class="ghost" id="backBtn">‹ 菜单</button>
+    <span class="brand">第 <b id="handNo">1</b> 局</span>
+    <span class="stat">盲注 <b id="blindInfo"></b></span>
+    <span class="spacer"></span>
+    <button class="ghost" id="logBtn">记录</button>
+  </div>
+
+  <div class="table-wrap">
+    <div class="table">
+      <div class="center">
+        <div id="community"></div>
+        <div id="pot"></div>
+      </div>
+      <div id="seats"></div>
+    </div>
+  </div>
+
+  <div id="infoPanel">
+    <div class="info-card" id="oddsCard">
+      <div class="ic-title">你的成牌概率</div>
+      <div id="oddsList" class="ic-body">—</div>
+    </div>
+    <div class="info-card" id="equityCard">
+      <div class="ic-title">当前胜率（估算）</div>
+      <div id="equityText" class="ic-body">—</div>
+    </div>
+  </div>
+
+  <div id="coachBanner" class="coach" style="display:none">
+    <div class="coach-head">🎓 教练点评</div>
+    <div id="coachText"></div>
+  </div>
+
+  <div class="actionbar">
+    <div class="turn-info"><span class="who">轮到 <b id="curName">—</b></span></div>
+    <div id="btnRow"></div>
+    <div id="raisePanel"></div>
+  </div>
+</div>
+
+<!-- ============ 日志浮层 ============ -->
+<div id="logModal">
+  <div class="box">
+    <h2>对局记录</h2>
+    <div id="logList"></div>
+    <button class="primary" id="logClose">关闭</button>
+  </div>
+</div>
+
+<!-- ============ 结算浮层 ============ -->
+<div id="overlay">
+  <div class="box">
+    <h2 id="ovTitle"></h2>
+    <div class="msg" id="ovMsg"></div>
+    <div class="actions" id="ovActions"></div>
+  </div>
+</div>
+
+<script src="core.js"></script>
+<script src="odds.js"></script>
+<script src="ai.js"></script>
+<script src="coach.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
